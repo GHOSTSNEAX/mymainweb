@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GR4M's About</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/vZ2sF4dV/engineer.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #04AA6D;
+            --dark-color: #222;
+            --light-color: #f8f9fa;
+            --hover-color: #3ddb9f;
+            --text-color: #f8f9fa;
+            --nav-height: 60px;
+            --accent-color: #ffb74d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Navigation - Same as main page */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 0 5%;
+            height: var(--nav-height);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-logo {
+            color: var(--light-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links > li:not(:last-child) {
+            margin-right: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: rgba(51, 51, 51, 0.95);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0 0 4px 4px;
+            overflow: hidden;
+        }
+        
+        .dropdown-content a {
+            color: var(--light-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: rgba(4, 170, 109, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-toggle::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Main Content */
+        .container {
+            text-align: center;
+            color: white;
+            padding: calc(var(--nav-height) + 50px) 20px 50px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+        
+        .main-heading, .sub-heading {
+            margin: 0;
+            animation: glitch 1.5s infinite;
+        }
+        
+        .main-heading {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-color), var(--hover-color));
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+        }
+        
+        .sub-heading {
+            font-size: 1.8rem;
+            margin-top: 10px;
+            color: var(--light-color);
+            opacity: 0.9;
+        }
+        
+        .icons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .icons a {
+            color: var(--light-color);
+            font-size: 2.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .icons a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .icons a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .icons a:hover::after {
+            width: 100%;
+        }
+        
+        /* Bio Section */
+        .bio {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(51, 51, 51, 0.7);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(4, 170, 109, 0.3);
+        }
+        
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+                text-shadow: 1px 1px 0 var(--light-color), -1px -1px 0 var(--primary-color);
+            }
+            20% {
+                transform: translate(-5px, 5px);
+                text-shadow: 2px 2px 0 var(--primary-color), -2px -2px 0 var(--accent-color);
+            }
+            40% {
+                transform: translate(5px, -5px);
+                text-shadow: 1px 1px 0 var(--accent-color), -1px -1px 0 var(--primary-color);
+            }
+            60% {
+                transform: translate(-5px, -5px);
+                text-shadow: 2px 2px 0 var(--light-color), -2px -2px 0 var(--primary-color);
+            }
+            80% {
+                transform: translate(5px, 5px);
+                text-shadow: 1px 1px 0 var(--primary-color), -1px -1px 0 var(--accent-color);
+            }
+            100% {
+                transform: translate(0);
+                text-shadow: 1px 1px 0 var(--light-color), -1px -1px 0 var(--primary-color);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: var(--nav-height);
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - var(--nav-height));
+                background-color: rgba(51, 51, 51, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 5%;
+                transition: all 0.5s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-content {
+                display: block;
+                margin-top: 10px;
+            }
+            
+            .main-heading {
+                font-size: 2.5rem;
+            }
+            
+            .sub-heading {
+                font-size: 1.2rem;
+            }
+            
+            .icons {
+                gap: 20px;
+            }
+            
+            .icons a {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar - Same as main page -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <i class="fas fa-code"></i> GR4M
+        </a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Projects <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="mygame.html">My Game</a>
+                </div>
+            </li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-heading">About Me</div>
+        <div class="sub-heading">Developer | Manager | Gamer</div>
+        
+        <div class="bio">
+            <p>Started my journey in 2019 as a normal gamer and founded MZA with zayn in 2020, started coding, learning new stuff, improving myself continously.</p>
+            <p>When i'm not online that means im busy though im always busy.</p>
+        </div>
+        
+        <div class="icons">
+            <a href="https://discord.gg/Mc3eTER67f" target="_blank" title="Discord Server"><i class="fab fa-discord"></i></a>
+            <a href="https://github.com/GHOSTSNEAX" target="_blank" title="GitHub Profile"><i class="fab fa-github"></i></a>
+            <a href="mailto:ethanmhunt91@gmail.com" title="Email Me"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle - Same as main page
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a:not(.dropdown-toggle)').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Dropdown functionality for mobile
+        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!-- At the bottom hehe bottom -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #1a1a1a;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .content {
+      padding: 20px;
+      flex: 1;
+    }
+    .copyright-footer {
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.3);
+      font-size: 14px;
+      /* Hide initially, show only at bottom */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    body.scrolled-to-bottom .copyright-footer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+  </div>
+
+  <div class="copyright-footer">
+    &copy; 2025 M.Hatib. All Rights Reserved.
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      const body = document.body;
+      const isBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 10; // 10px buffer
+      body.classList.toggle('scrolled-to-bottom', isBottom);
+    });
+  </script>
+</body>
+</html>
